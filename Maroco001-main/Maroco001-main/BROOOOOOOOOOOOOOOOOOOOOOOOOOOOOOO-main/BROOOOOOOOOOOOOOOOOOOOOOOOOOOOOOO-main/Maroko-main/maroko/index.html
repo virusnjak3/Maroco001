@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* Базові стилі */
         :root {
@@ -16,6 +17,8 @@
             --background-color: #f8f4ff;
             --text-color: #333;
             --light-text-color: #f1f1f1;
+            --dark-color: #1a1a1a;
+            --dark-light: #2c3e50;
         }
 
         * {
@@ -34,7 +37,7 @@
             min-height: 100vh;
             line-height: 1.6;
         }
-        
+
         /* Хедер */
         header {
             position: sticky;
@@ -94,19 +97,41 @@
             align-items: center;
             gap: 15px;
         }
-        .cart, .wishlist {
+        .header-icon-btn {
             background-color: var(--accent-color);
             color: var(--primary-color);
-            padding: 8px 14px;
-            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-weight: bold;
             cursor: pointer;
             position: relative;
             user-select: none;
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, background-color 0.3s;
         }
-        .cart:hover, .wishlist:hover {
-            transform: scale(1.05);
+        .header-icon-btn:hover {
+            transform: scale(1.1);
+            background-color: #ffda6a;
+        }
+        .header-icon-btn i {
+            font-size: 1.2em;
+        }
+        .item-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .language-switcher {
             display: flex;
@@ -133,12 +158,12 @@
         }
         #searchInput {
             padding: 10px;
-            border: 1px solid var(--secondary-color);
+            border: none;
             border-radius: 20px;
             width: 200px;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.2);
             color: var(--light-text-color);
-            transition: width 0.3s;
+            transition: width 0.3s, background-color 0.3s;
         }
         #searchInput::placeholder {
             color: rgba(255, 255, 255, 0.7);
@@ -146,7 +171,109 @@
         #searchInput:focus {
             width: 250px;
             outline: none;
-            border-color: var(--accent-color);
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('ofic2.webp') no-repeat center center/cover;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .hero-content {
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        #hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 4em;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            animation: slideInFromTop 1s ease-in-out;
+        }
+        #hero p {
+            font-size: 1.8em;
+            font-weight: 300;
+            animation: slideInFromBottom 1s ease-in-out;
+            color: #ffda6a;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        }
+        .hero-btn {
+            margin-top: 30px;
+            padding: 15px 30px;
+            border: none;
+            background: linear-gradient(45deg, var(--accent-color), #ff9900);
+            color: var(--dark-color);
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 192, 0, 0.4);
+        }
+        .hero-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 192, 0, 0.6);
+        }
+
+        /* Newsletter Section */
+        #newsletter {
+            padding: 50px 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-light));
+            color: white;
+            text-align: center;
+        }
+        #newsletter h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        #newsletter p {
+            font-size: 1.1em;
+            margin-bottom: 25px;
+        }
+        #newsletter form {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        #newsletter input[type="email"] {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            width: 300px;
+            font-size: 1em;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--dark-color);
+        }
+        #newsletter input[type="email"]::placeholder {
+            color: #aaa;
+        }
+        #newsletter button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            background: var(--accent-color);
+            color: var(--dark-color);
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        #newsletter button:hover {
+            background-color: #ffda6a;
+            transform: translateY(-2px);
         }
 
         /* Основний контент */
@@ -162,32 +289,6 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-        #slider {
-            position: relative;
-            width: 100%;
-            max-width: 1200px;
-            height: 500px;
-            margin: 30px auto;
-            overflow: hidden;
-            border-radius: 16px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-        #slider img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-        }
-        #slider img.active {
-            opacity: 1;
-            z-index: 1;
-        }
-        #products {
-            background-color: white;
-        }
-
         /* Фільтри та сортування */
         #productControls {
             display: flex;
@@ -307,6 +408,46 @@
         #productDetailModal .detail-desc {
             margin: 20px 0;
         }
+        .product-options {
+            margin: 20px 0;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .option-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .option-group label {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .color-option.active {
+            border-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        .size-option {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .size-option.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
         #productDetailModal .add-to-cart-btn {
             background-color: var(--primary-color);
             color: white;
@@ -322,7 +463,7 @@
             color: var(--primary-color);
             transform: scale(1.05);
         }
-        
+
         /* Відгуки */
         .reviews-section {
             margin-top: 30px;
@@ -368,7 +509,7 @@
         .review-item .rating-stars {
             color: var(--accent-color);
         }
-        
+
         /* Про нас та футер */
         #about {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -407,7 +548,7 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
         footer {
-            background-color: var(--primary-color);
+            background-color: var(--dark-color);
             color: white;
             text-align: center;
             padding: 20px;
@@ -567,6 +708,14 @@
             from { transform: translateY(20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
+        @keyframes slideInFromTop {
+            0% { transform: translateY(-100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes slideInFromBottom {
+            0% { transform: translateY(100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -584,8 +733,14 @@
                 width: 100%;
                 text-align: center;
             }
-            #slider {
-                height: 300px;
+            #hero {
+                height: 400px;
+            }
+            #hero h1 {
+                font-size: 2.5em;
+            }
+            #hero p {
+                font-size: 1.2em;
             }
             .section-title {
                 font-size: 2em;
@@ -607,24 +762,27 @@
             <button class="lang-btn" data-lang="uk">UA</button>
             <button class="lang-btn" data-lang="en">EN</button>
         </div>
-        <div class="wishlist" onclick="openModal('wishlistModal')" aria-label="Переглянути обране" title="Переглянути обране">
-            ❤️ <span id="wishlistCount">0</span>
+        <div class="header-icon-btn" onclick="openModal('wishlistModal')" aria-label="Переглянути обране" title="Переглянути обране">
+            <i class="fa-solid fa-heart"></i><span id="wishlistCount" class="item-count">0</span>
         </div>
-        <div class="cart" onclick="openModal('cartModal')" aria-label="Переглянути корзину" title="Переглянути корзину">
-            🛒 <span id="cartCount">0</span>
+        <div class="header-icon-btn" onclick="openModal('cartModal')" aria-label="Переглянути корзину" title="Переглянути корзину">
+            <i class="fa-solid fa-cart-shopping"></i><span id="cartCount" class="item-count">0</span>
         </div>
         <input type="text" id="searchInput" placeholder="Пошук товарів..." data-i18n-placeholder="searchPlaceholder" />
     </div>
 </header>
 
-<div id="slider" aria-label="Головний слайдер">
-    <img src="ofic2.webp" alt="Офіс 2" class="active" />
-    <img src="ofic3.webp" alt="Офіс 3" />
-</div>
+<section id="hero">
+    <div class="hero-content">
+        <h1 data-i18n="heroTitle">Мода, що надихає</h1>
+        <p data-i18n="heroSubtitle">Створюй свій стиль разом з Maroko</p>
+        <a href="#products" class="hero-btn" data-i18n="heroBtn">До товарів</a>
+    </div>
+</section>
 
 <section id="products">
     <h2 class="section-title" data-i18n="productsTitle">Наші товари</h2>
-    
+
     <div id="productControls">
         <select id="sortSelect" data-i18n-sort-placeholder="sortPlaceholder">
             <option value="default" data-i18n="sortByDefault">За замовчуванням</option>
@@ -637,63 +795,72 @@
     </div>
 
     <div id="productGrid">
-        <div class="product" data-name="Джинси" data-price="600" data-category="men" data-i18n-name="jeans">
-            <button class="wishlist-btn" onclick="toggleWishlist(this, 'jeans')">❤️</button>
+        <div class="product" data-name="Джинси" data-price="600" data-category="men" data-i18n-name="jeans" data-id="jeans">
+            <button class="wishlist-btn" onclick="toggleWishlist(this, 'jeans')"><i class="fa-regular fa-heart"></i></button>
             <img src="jina-removebg-preview.png" alt="Джинси" onclick="openProductDetail('jeans')" />
             <h3 data-i18n="jeans">Джинси</h3>
             <p>600 грн</p>
             <button class="add-to-cart" onclick="addToCart('jeans')" data-i18n="addToCartBtn">Додати в кошик</button>
         </div>
-        <div class="product" data-name="Зимова куртка" data-price="1200" data-category="men" data-i18n-name="winterJacket">
-            <button class="wishlist-btn" onclick="toggleWishlist(this, 'winterJacket')">❤️</button>
+        <div class="product" data-name="Зимова куртка" data-price="1200" data-category="men" data-i18n-name="winterJacket" data-id="winterJacket">
+            <button class="wishlist-btn" onclick="toggleWishlist(this, 'winterJacket')"><i class="fa-regular fa-heart"></i></button>
             <img src="cop-removebg-preview.png" alt="Зимова куртка" onclick="openProductDetail('winterJacket')" />
             <h3 data-i18n="winterJacket">Зимова куртка</h3>
             <p>1200 грн</p>
             <button class="add-to-cart" onclick="addToCart('winterJacket')" data-i18n="addToCartBtn">Додати в кошик</button>
         </div>
-        <div class="product" data-name="Футболка" data-price="200" data-category="women" data-i18n-name="tshirt">
-            <button class="wishlist-btn" onclick="toggleWishlist(this, 'tshirt')">❤️</button>
+        <div class="product" data-name="Футболка" data-price="200" data-category="women" data-i18n-name="tshirt" data-id="tshirt">
+            <button class="wishlist-btn" onclick="toggleWishlist(this, 'tshirt')"><i class="fa-regular fa-heart"></i></button>
             <img src="dop-removebg-preview.png" alt="Футболка" onclick="openProductDetail('tshirt')" />
             <h3 data-i18n="tshirt">Футболка</h3>
             <p>200 грн</p>
             <button class="add-to-cart" onclick="addToCart('tshirt')" data-i18n="addToCartBtn">Додати в кошик</button>
         </div>
-        <div class="product" data-name="Рюкзак" data-price="1100" data-category="men" data-i18n-name="backpack">
-            <button class="wishlist-btn" onclick="toggleWishlist(this, 'backpack')">❤️</button>
+        <div class="product" data-name="Рюкзак" data-price="1100" data-category="men" data-i18n-name="backpack" data-id="backpack">
+            <button class="wishlist-btn" onclick="toggleWishlist(this, 'backpack')"><i class="fa-regular fa-heart"></i></button>
             <img src="Backpack-removebg-preview.png" alt="Рюкзак" onclick="openProductDetail('backpack')" />
             <h3 data-i18n="backpack">Рюкзак</h3>
             <p>1100 грн</p>
             <button class="add-to-cart" onclick="addToCart('backpack')" data-i18n="addToCartBtn">Додати в кошик</button>
         </div>
-        <div class="product" data-name="Шарф" data-price="350" data-category="women" data-i18n-name="scarf">
-            <button class="wishlist-btn" onclick="toggleWishlist(this, 'scarf')">❤️</button>
+        <div class="product" data-name="Шарф" data-price="350" data-category="women" data-i18n-name="scarf" data-id="scarf">
+            <button class="wishlist-btn" onclick="toggleWishlist(this, 'scarf')"><i class="fa-regular fa-heart"></i></button>
             <img src="Scarf-removebg-preview.png" alt="Шарф" onclick="openProductDetail('scarf')" />
             <h3 data-i18n="scarf">Шарф</h3>
             <p>350 грн</p>
             <button class="add-to-cart" onclick="addToCart('scarf')" data-i18n="addToCartBtn">Додати в кошик</button>
         </div>
-        <div class="product" data-name="Рукавички" data-price="250" data-category="men" data-i18n-name="gloves">
-            <button class="wishlist-btn" onclick="toggleWishlist(this, 'gloves')">❤️</button>
+        <div class="product" data-name="Рукавички" data-price="250" data-category="men" data-i18n-name="gloves" data-id="gloves">
+            <button class="wishlist-btn" onclick="toggleWishlist(this, 'gloves')"><i class="fa-regular fa-heart"></i></button>
             <img src="Gloves-removebg-preview.png" alt="Рукавички" onclick="openProductDetail('gloves')" />
             <h3 data-i18n="gloves">Рукавички</h3>
             <p>250 грн</p>
             <button class="add-to-cart" onclick="addToCart('gloves')" data-i18n="addToCartBtn">Додати в кошик</button>
         </div>
-        <div class="product" data-name="Пальто" data-price="2500" data-category="men" data-i18n-name="coat">
-            <button class="wishlist-btn" onclick="toggleWishlist(this, 'coat')">❤️</button>
+        <div class="product" data-name="Пальто" data-price="2500" data-category="men" data-i18n-name="coat" data-id="coat">
+            <button class="wishlist-btn" onclick="toggleWishlist(this, 'coat')"><i class="fa-regular fa-heart"></i></button>
             <img src="Coat-removebg-preview.png" alt="Пальто" onclick="openProductDetail('coat')" />
             <h3 data-i18n="coat">Пальто</h3>
             <p>2500 грн</p>
             <button class="add-to-cart" onclick="addToCart('coat')" data-i18n="addToCartBtn">Додати в кошик</button>
         </div>
-        <div class="product" data-name="Сукня" data-price="1300" data-category="women" data-i18n-name="dress">
-            <button class="wishlist-btn" onclick="toggleWishlist(this, 'dress')">❤️</button>
+        <div class="product" data-name="Сукня" data-price="1300" data-category="women" data-i18n-name="dress" data-id="dress">
+            <button class="wishlist-btn" onclick="toggleWishlist(this, 'dress')"><i class="fa-regular fa-heart"></i></button>
             <img src="Dress-removebg-preview.png" alt="Сукня" onclick="openProductDetail('dress')" />
             <h3 data-i18n="dress">Сукня</h3>
             <p>1300 грн</p>
             <button class="add-to-cart" onclick="addToCart('dress')" data-i18n="addToCartBtn">Додати в кошик</button>
         </div>
     </div>
+</section>
+
+<section id="newsletter">
+    <h2 data-i18n="newsletterTitle">Отримуйте найкращі пропозиції</h2>
+    <p data-i18n="newsletterSubtitle">Підпишіться на нашу розсилку та будьте в курсі всіх новинок та акцій.</p>
+    <form>
+        <input type="email" placeholder="Введіть свій email" required data-i18n-placeholder="newsletterPlaceholder" />
+        <button type="submit" data-i18n="subscribeBtn">Підписатись</button>
+    </form>
 </section>
 
 <section id="about">
@@ -789,6 +956,18 @@
         <img id="productDetailImage" src="" alt="" class="product-image" />
         <p id="productDetailPrice" class="detail-price"></p>
         <p id="productDetailDesc" class="detail-desc"></p>
+
+        <div class="product-options">
+            <div class="option-group">
+                <label data-i18n="colorOption">Колір:</label>
+                <div id="productDetailColors"></div>
+            </div>
+            <div class="option-group">
+                <label data-i18n="sizeOption">Розмір:</label>
+                <div id="productDetailSizes"></div>
+            </div>
+        </div>
+
         <button id="productDetailAddToCartBtn" class="add-to-cart-btn" data-i18n="addToCartBtn">Додати в кошик</button>
 
         <div class="reviews-section">
@@ -818,6 +997,8 @@
     let currentProduct;
     let productsData;
     let productReviews = JSON.parse(localStorage.getItem('productReviews')) || {};
+    let selectedSize = '';
+    let selectedColor = '';
 
     const translations = {
         uk: {
@@ -825,7 +1006,10 @@
             searchPlaceholder: 'Пошук товарів...', productsTitle: 'Наші товари',
             addToCartBtn: 'Додати в кошик', jeans: 'Джинси', winterJacket: 'Зимова куртка',
             tshirt: 'Футболка', backpack: 'Рюкзак', scarf: 'Шарф', gloves: 'Рукавички',
-            coat: 'Пальто', dress: 'Сукня', aboutTitle: 'Про нас',
+            coat: 'Пальто', dress: 'Сукня', aboutTitle: 'Про нас', heroTitle: 'Мода, що надихає',
+            heroSubtitle: 'Створюй свій стиль разом з Maroko', heroBtn: 'До товарів',
+            newsletterTitle: 'Отримуйте найкращі пропозиції', newsletterSubtitle: 'Підпишіться на нашу розсилку та будьте в курсі всіх новинок та акцій.',
+            newsletterPlaceholder: 'Введіть свій email', subscribeBtn: 'Підписатись',
             aboutText: 'Ми — український онлайн-магазин одягу, який пропонує якісні речі за доступною ціною. Працюємо напряму з постачальниками без посередників. Нашою місією є зробити стиль доступним для кожного.',
             supportTitle: 'Підтримка', yourName: 'Ваше ім’я', yourEmail: 'Ваш email',
             yourMessage: 'Ваше повідомлення', sendBtn: 'Надіслати', rateService: 'Будь ласка, оцініть наш сервіс:',
@@ -848,14 +1032,23 @@
             sortByDefault: 'За замовчуванням', sortByPriceAsc: 'Ціна (від низької до високої)',
             sortByPriceDesc: 'Ціна (від високої до низької)', filterAll: 'Всі', filterMen: 'Чоловіче',
             filterWomen: 'Жіноче', reviewsTitle: 'Відгуки', submitReviewBtn: 'Надіслати відгук',
-            footer: '© 2025 Maroko. Усі права захищені.'
+            footer: '© 2025 Maroko. Усі права захищені.',
+            topDealsTitle: 'Найкращі пропозиції',
+            colorOption: 'Колір:',
+            sizeOption: 'Розмір:',
+            sizeNotSelected: 'Будь ласка, виберіть розмір.',
+            colorNotSelected: 'Будь ласка, виберіть колір.',
+            addedToCart: ' додано до кошика!'
         },
         en: {
             navProducts: 'Products', navAbout: 'About Us', navSupport: 'Support',
             searchPlaceholder: 'Search for products...', productsTitle: 'Our Products',
             addToCartBtn: 'Add to cart', jeans: 'Jeans', winterJacket: 'Winter Jacket',
             tshirt: 'T-shirt', backpack: 'Backpack', scarf: 'Scarf', gloves: 'Gloves',
-            coat: 'Coat', dress: 'Dress', aboutTitle: 'About Us',
+            coat: 'Coat', dress: 'Dress', aboutTitle: 'About Us', heroTitle: 'Inspiring Fashion',
+            heroSubtitle: 'Create your style with Maroko', heroBtn: 'Shop Now',
+            newsletterTitle: 'Get the Best Deals', newsletterSubtitle: 'Subscribe to our newsletter and stay up to date with all news and promotions.',
+            newsletterPlaceholder: 'Enter your email', subscribeBtn: 'Subscribe',
             aboutText: 'We are a Ukrainian online clothing store that offers quality clothing at an affordable price. We work directly with suppliers without intermediaries. Our mission is to make style accessible to everyone.',
             supportTitle: 'Support', yourName: 'Your Name', yourEmail: 'Your email',
             yourMessage: 'Your message', sendBtn: 'Send', rateService: 'Please, rate our service:',
@@ -878,20 +1071,60 @@
             sortByDefault: 'Default', sortByPriceAsc: 'Price (low to high)',
             sortByPriceDesc: 'Price (high to low)', filterAll: 'All', filterMen: 'Men',
             filterWomen: 'Women', reviewsTitle: 'Reviews', submitReviewBtn: 'Submit Review',
-            footer: '© 2025 Maroko. All rights reserved.'
+            footer: '© 2025 Maroko. All rights reserved.',
+            topDealsTitle: 'Top Deals',
+            colorOption: 'Color:',
+            sizeOption: 'Size:',
+            sizeNotSelected: 'Please select a size.',
+            colorNotSelected: 'Please select a color.',
+            addedToCart: ' added to cart!'
         }
     };
-    
+
     // Ініціалізація даних та перевірка localStorage
     document.addEventListener('DOMContentLoaded', () => {
         productsData = Array.from(document.querySelectorAll('.product')).map(el => ({
-            id: el.getAttribute('data-i18n-name'),
+            id: el.getAttribute('data-id'),
             name: el.getAttribute('data-name'),
             price: parseInt(el.getAttribute('data-price'), 10),
             category: el.getAttribute('data-category'),
             element: el,
             image: el.querySelector('img').src,
-            desc: translations.uk.productDesc[el.getAttribute('data-i18n-name')] || ''
+            desc: translations.uk.productDesc[el.getAttribute('data-i18n-name')] || '',
+            options: {
+                jeans: {
+                    colors: ['#2e4053', '#5d6d7e', '#aeb6bf'],
+                    sizes: ['S', 'M', 'L', 'XL']
+                },
+                winterJacket: {
+                    colors: ['#000000', '#566573', '#9b59b6'],
+                    sizes: ['S', 'M', 'L', 'XL', 'XXL']
+                },
+                tshirt: {
+                    colors: ['#fef9e7', '#f1c40f', '#d35400', '#1abc9c'],
+                    sizes: ['XS', 'S', 'M', 'L']
+                },
+                backpack: {
+                    colors: ['#17202a', '#4a235a', '#5499c7'],
+                    sizes: ['OS']
+                },
+                scarf: {
+                    colors: ['#b03a2e', '#e67e22', '#f4d03f'],
+                    sizes: ['OS']
+                },
+                gloves: {
+                    colors: ['#17202a', '#616a6b', '#c0392b'],
+                    sizes: ['S', 'M', 'L']
+                },
+                coat: {
+                    colors: ['#34495e', '#797d7f', '#2c3e50'],
+                    sizes: ['S', 'M', 'L', 'XL']
+                },
+                dress: {
+                    colors: ['#f7dc6f', '#f5b041', '#a569bd'],
+                    sizes: ['XS', 'S', 'M', 'L']
+                },
+            }
         }));
         updateWishlistCount();
         setLanguage('uk');
@@ -903,7 +1136,7 @@
         const prefixes = document.querySelectorAll('[data-i18n-prefix]');
         const htmlElements = document.querySelectorAll('[data-i18n-html]');
         const langBtns = document.querySelectorAll('.lang-btn');
-        
+
         elements.forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (translations[lang][key]) {
@@ -950,6 +1183,13 @@
         document.querySelectorAll('#productControls button')[0].innerText = translations[lang].filterAll;
         document.querySelectorAll('#productControls button')[1].innerText = translations[lang].filterMen;
         document.querySelectorAll('#productControls button')[2].innerText = translations[lang].filterWomen;
+        document.querySelector('#hero h1').innerText = translations[lang].heroTitle;
+        document.querySelector('#hero p').innerText = translations[lang].heroSubtitle;
+        document.querySelector('.hero-btn').innerText = translations[lang].heroBtn;
+        document.querySelector('#newsletter h2').innerText = translations[lang].newsletterTitle;
+        document.querySelector('#newsletter p').innerText = translations[lang].newsletterSubtitle;
+        document.querySelector('#newsletter input[type="email"]').placeholder = translations[lang].newsletterPlaceholder;
+        document.querySelector('#newsletter button').innerText = translations[lang].subscribeBtn;
 
         renderCart();
         renderWishlist();
@@ -1011,22 +1251,78 @@
         productGrid.innerHTML = '';
         visibleProducts.forEach(p => productGrid.appendChild(p.element));
     }
-    
+
     // Картка товару
     function openProductDetail(productId) {
         const product = productsData.find(p => p.id === productId);
         if (!product) return;
         currentProduct = product;
-        
+
         const lang = document.querySelector('.lang-btn.active').getAttribute('data-lang');
         document.getElementById('productDetailTitle').innerText = translations[lang][product.id];
         document.getElementById('productDetailImage').src = product.image;
         document.getElementById('productDetailPrice').innerText = `${product.price} грн`;
         document.getElementById('productDetailDesc').innerText = translations[lang].productDesc[product.id];
-        document.getElementById('productDetailAddToCartBtn').onclick = () => addToCart(product.id);
-        
+
+        // Рендер опцій (колір та розмір)
+        const colorsContainer = document.getElementById('productDetailColors');
+        colorsContainer.innerHTML = '';
+        if (product.options[productId].colors) {
+            product.options[productId].colors.forEach(color => {
+                const colorBtn = document.createElement('div');
+                colorBtn.className = 'color-option';
+                colorBtn.style.backgroundColor = color;
+                colorBtn.onclick = () => selectColor(color);
+                colorsContainer.appendChild(colorBtn);
+            });
+        }
+
+        const sizesContainer = document.getElementById('productDetailSizes');
+        sizesContainer.innerHTML = '';
+        if (product.options[productId].sizes) {
+            product.options[productId].sizes.forEach(size => {
+                const sizeBtn = document.createElement('div');
+                sizeBtn.className = 'size-option';
+                sizeBtn.innerText = size;
+                sizeBtn.onclick = () => selectSize(size);
+                sizesContainer.appendChild(sizeBtn);
+            });
+        }
+
+        document.getElementById('productDetailAddToCartBtn').onclick = () => {
+            const selectedSizeElement = document.querySelector('.size-option.active');
+            const selectedColorElement = document.querySelector('.color-option.active');
+            if (!selectedSizeElement) {
+                alert(translations[lang].sizeNotSelected);
+                return;
+            }
+            if (!selectedColorElement && product.options[productId].colors.length > 0) {
+                alert(translations[lang].colorNotSelected);
+                return;
+            }
+            addToCart(product.id, selectedSizeElement.innerText, selectedColorElement ? selectedColorElement.style.backgroundColor : null);
+        };
+
         renderReviews(product.id);
         openModal('productDetailModal');
+    }
+
+    function selectSize(size) {
+        document.querySelectorAll('.size-option').forEach(el => el.classList.remove('active'));
+        const selected = document.querySelector(`.size-option[onclick="selectSize('${size}')"]`);
+        if (selected) {
+            selected.classList.add('active');
+            selectedSize = size;
+        }
+    }
+
+    function selectColor(color) {
+        document.querySelectorAll('.color-option').forEach(el => el.classList.remove('active'));
+        const selected = document.querySelector(`.color-option[style="background-color: ${color};"]`);
+        if (selected) {
+            selected.classList.add('active');
+            selectedColor = color;
+        }
     }
 
     // Відгуки
@@ -1052,7 +1348,7 @@
             });
         }
     }
-    
+
     function submitReview(event) {
         event.preventDefault();
         const reviewerName = document.getElementById('reviewerName').value;
@@ -1069,33 +1365,42 @@
             comment: reviewerComment,
             rating: parseInt(rating.value)
         };
-        
+
         const productId = currentProduct.id;
         if (!productReviews[productId]) {
             productReviews[productId] = [];
         }
         productReviews[productId].push(newReview);
         localStorage.setItem('productReviews', JSON.stringify(productReviews));
-        
+
         renderReviews(productId);
         document.querySelector('.review-form').reset();
     }
 
     // Кошик
-    function addToCart(productId) {
+    function addToCart(productId, size, color) {
         const product = productsData.find(p => p.id === productId);
         if (!product) return;
+
         const name = product.name;
         const price = product.price;
+        const uniqueId = `${name}-${size}-${color}`;
 
-        if (cart[name]) {
-            cart[name].qty++;
+        if (cart[uniqueId]) {
+            cart[uniqueId].qty++;
         } else {
-            cart[name] = { price, qty: 1 };
+            cart[uniqueId] = {
+                name: name,
+                price: price,
+                qty: 1,
+                size: size,
+                color: color
+            };
         }
         updateCartCount();
         closeModal('productDetailModal');
-        alert(`${name} додано до кошика!`);
+        const currentLang = document.querySelector('.lang-btn.active').getAttribute('data-lang');
+        alert(`${name}${translations[currentLang].addedToCart}`);
     }
 
     function updateCartCount() {
@@ -1108,7 +1413,7 @@
         cartItemsDiv.innerHTML = "";
         const keys = Object.keys(cart);
         const currentLang = document.querySelector('.lang-btn.active').getAttribute('data-lang');
-        
+
         if (keys.length === 0) {
             cartItemsDiv.innerHTML = `<p class="empty-cart" data-i18n="emptyCart">${translations[currentLang].emptyCart}</p>`;
             document.getElementById("orderTotal").innerText = "";
@@ -1116,39 +1421,39 @@
             return;
         }
 
-        keys.forEach(name => {
-            const item = cart[name];
+        keys.forEach(key => {
+            const item = cart[key];
             const itemDiv = document.createElement("div");
             itemDiv.setAttribute("role", "group");
-            itemDiv.setAttribute("aria-label", `${name}, ціна ${item.price} гривень, кількість ${item.qty}`);
+            itemDiv.setAttribute("aria-label", `${item.name}, ціна ${item.price} гривень, кількість ${item.qty}`);
             itemDiv.innerHTML = `
-                <span>${name}</span>
+                <span>${item.name} (${item.size})</span>
                 <span>${item.price} грн</span>
-                <div class="qty-controls" aria-label="Кількість ${name}">
-                    <button aria-label="Зменшити кількість" onclick="changeQty('${name}', -1)">−</button>
+                <div class="qty-controls" aria-label="Кількість ${item.name}">
+                    <button aria-label="Зменшити кількість" onclick="changeQty('${key}', -1)">−</button>
                     <span>${item.qty}</span>
-                    <button aria-label="Збільшити кількість" onclick="changeQty('${name}', 1)">+</button>
+                    <button aria-label="Збільшити кількість" onclick="changeQty('${key}', 1)">+</button>
                 </div>
                 <span>${item.price * item.qty} грн</span>
             `;
             cartItemsDiv.appendChild(itemDiv);
         });
 
-        const total = keys.reduce((acc, name) => acc + cart[name].price * cart[name].qty, 0);
+        const total = keys.reduce((acc, key) => acc + cart[key].price * cart[key].qty, 0);
         document.getElementById("orderTotal").innerText = `${translations[currentLang].total} ${total} грн`;
         document.getElementById("orderBtn").style.display = "block";
     }
 
-    function changeQty(name, delta) {
-        if (!cart[name]) return;
-        cart[name].qty += delta;
-        if (cart[name].qty <= 0) {
-            delete cart[name];
+    function changeQty(key, delta) {
+        if (!cart[key]) return;
+        cart[key].qty += delta;
+        if (cart[key].qty <= 0) {
+            delete cart[key];
         }
         updateCartCount();
         renderCart();
     }
-    
+
     function placeOrder() {
         if (Object.keys(cart).length === 0) {
             alert("Корзина порожня!");
@@ -1163,28 +1468,37 @@
     }
 
     // Обране (Wishlist)
+    function toggleWishlist(button, productId) {
+        const product = productsData.find(p => p.id === productId);
+        if (!product) return;
+
+        if (wishlist[productId]) {
+            delete wishlist[productId];
+        } else {
+            wishlist[productId] = product;
+        }
+
+        localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        updateWishlistCount();
+        renderWishlist();
+    }
+
     function updateWishlistCount() {
         const count = Object.keys(wishlist).length;
         document.getElementById("wishlistCount").innerText = count;
         document.querySelectorAll('.wishlist-btn').forEach(btn => {
-            const id = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+            const id = btn.parentNode.getAttribute('data-id');
+            const icon = btn.querySelector('i');
             if (wishlist[id]) {
+                icon.classList.remove('fa-regular');
+                icon.classList.add('fa-solid');
                 btn.classList.add('active');
             } else {
+                icon.classList.remove('fa-solid');
+                icon.classList.add('fa-regular');
                 btn.classList.remove('active');
             }
         });
-    }
-
-    function toggleWishlist(button, productId) {
-        if (wishlist[productId]) {
-            delete wishlist[productId];
-        } else {
-            wishlist[productId] = productsData.find(p => p.id === productId);
-        }
-        localStorage.setItem('wishlist', JSON.stringify(wishlist));
-        updateWishlistCount();
-        renderWishlist();
     }
 
     function renderWishlist() {
@@ -1271,15 +1585,6 @@
     });
 
     // Слайдер та скрол
-    const slides = document.querySelectorAll('#slider img');
-    let currentIndex = 0;
-    function showNextSlide() {
-        slides[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % slides.length;
-        slides[currentIndex].classList.add('active');
-    }
-    setInterval(showNextSlide, 3000);
-
     let prevScrollPos = window.pageYOffset;
     const header = document.querySelector("header");
     window.onscroll = function() {
